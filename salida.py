@@ -31,8 +31,9 @@ class InterfazSalida(wx.Frame):
         self.Bind(wx.EVT_PAINT, self.pintar)
         self.Move((800, 250))
         self.Show()
-    def pintar(self,a):
-        aux=[]
+    def pintar(self, a):
+        auxX = []
+        aux = []
         dc = wx.PaintDC(self)
         dc.Clear()
         dc.BeginDrawing()      
@@ -42,7 +43,7 @@ class InterfazSalida(wx.Frame):
                 px = 50
                 py = self.zy-300
                 dc.DrawCircle(px, py, 30)
-                dc.DrawText(str(x),px+5,py-10)
+                dc.DrawText(str(x), px+5, py-10)
                 aux.append(PosicionP(x, px, py))
                 print "pintadoa: "+str(x)
             elif x == 7:
@@ -70,29 +71,23 @@ class InterfazSalida(wx.Frame):
                 px = 50+(40*x)+(20*x)
                 py = self.zy-350
                 dc.DrawCircle(px, py, 30)
-                dc.DrawText(str(x),px+5,py-10)
+                dc.DrawText(str(x), px+5, py-10)
                 aux.append(PosicionP(x, px, py))
                 print "pintadod: "+str(x)
-        px1= None
-        px2= None
-        py1= None
-        py2= None
-        for x in xrange(0,self.n):
-            for y in xrange(0,self.n):
-                if self.vector[x][y]!=0:
-                    for z in xrange(0,self.n):
-                        if aux[z].n==x:
-                            px1=aux[z].x
-                            py1=aux[z].y
-                    for z in xrange(0,self.n):
-                        if aux[z].n==x:
-                            px2=aux[z].x
-                            py2=aux[z].y
-                    if x == 0:
-
-                    elif x == 7:
-                    elif x == 1:
-                    elif (x % 2) == 0:
-                    elif (x % 2) == 1:
-
-        
+        x1 = None
+        x2 = None
+        y1 = None
+        y2 = None
+        for x in xrange(0, self.n):
+            for y in xrange(0, self.n):
+                if self.vector[x][y] != 0:
+                    if x < y:
+                        for z in aux:
+                            if z.n == x:
+                                x1 = z.x
+                                y1 = z.y
+                            if z.n == y:
+                                x2 = z.x
+                                y2 = z.y
+                        dc.DrawLine(x1+30, y1+15, x2-30, y2)
+                        dc.DrawText(str(self.vector[x][y]),x1+((x2-x1)/2)+5,y1+((y2-y1)/2))
