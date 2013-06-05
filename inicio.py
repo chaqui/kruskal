@@ -15,10 +15,15 @@ class Inicio(wx.Frame):
         self.Move((800, 250))
         self.Show()
     def aceptarc(self,a):
-        self.a=int(self.texto.GetValue())
-        app = wx.App()
-        Interfaz(None, title='Tabla del Algoritmo de Kruskal',n=self.a)
-        app.MainLoop()
+        self.tamano=int(self.texto.GetValue())
+        if self.tamano <9 and self.tamano >0:
+            app = wx.App()
+            Interfaz(None, title='Tabla del Algoritmo de Kruskal',n=self.tamano)
+            app.MainLoop()
+        else:
+            dlg = wx.MessageDialog(self, "Debe de ser menor a 9", "error de <ingreso></ingreso>", wx.OK | wx.ICON_INFORMATION)
+            dlg.ShowModal()
+            dlg.Destroy()
 
 if __name__ == '__main__':
   
